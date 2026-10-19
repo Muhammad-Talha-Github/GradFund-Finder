@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A public snapshot of graduate research and funding opportunities collected by GradFund Finder." />
+    <meta name="theme-color" content="#f5f7f4" />
+    <title>GradFund Finder — Opportunity Snapshot</title>
+    <style>
+      :root { color-scheme: light; --ink:#17251f; --muted:#68776f; --line:#e1e8e2; --green:#27634a; --mint:#eaf3ed; --paper:#f5f7f4; }
+      * { box-sizing:border-box; }
+      body { margin:0; background:var(--paper); color:var(--ink); font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; }
+      a { color:var(--green); }
+      .shell { max-width:1120px; margin:auto; padding:34px 24px 64px; }
+      .topline { display:flex; align-items:center; gap:12px; color:var(--muted); font-size:13px; font-weight:650; }
+      .mark { display:grid; place-items:center; width:38px; height:38px; border-radius:12px; color:white; background:var(--green); font-size:19px; }
+      .hero { display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin:35px 0 25px; }
+      h1 { margin:0; font-size:clamp(31px,5vw,48px); line-height:1.05; letter-spacing:-1.8px; }
+      .intro { max-width:620px; margin:12px 0 0; color:var(--muted); }
+      .snapshot-tag { flex:none; padding:8px 12px; border:1px solid #d9e7dc; border-radius:999px; background:#edf5ef; color:#356a4a; font-size:12px; font-weight:700; }
+      .summary { display:flex; align-items:center; gap:9px; margin:0 0 17px; color:var(--muted); font-size:13px; }
+      .summary strong { color:var(--ink); }
+      .filters { display:grid; grid-template-columns:minmax(200px,2fr) repeat(4,minmax(130px,1fr)); gap:10px; padding:14px; border:1px solid var(--line); border-radius:16px; background:#fff; box-shadow:0 9px 28px #243a2b0a; }
+      input,select { min-width:0; height:42px; padding:0 12px; border:1px solid var(--line); border-radius:9px; background:white; color:var(--ink); font:inherit; font-size:13px; }
+      input:focus,select:focus { outline:3px solid #27634a20; border-color:#8aac94; }
+      .results { display:grid; gap:12px; margin-top:18px; }
+      .card { padding:20px; border:1px solid var(--line); border-radius:15px; background:#fff; box-shadow:0 4px 15px #243a2b08; }
+      .card-head { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; }
+      h2 { margin:0; font-size:18px; line-height:1.35; letter-spacing:-.25px; }
+      .org { margin:5px 0 0; color:var(--muted); font-size:13px; }
+      .badge { flex:none; padding:5px 9px; border-radius:999px; background:#f0f3f1; color:#53635a; font-size:11px; font-weight:700; }
+      .badge.verified { background:#e8f4eb; color:#286141; }
+      .meta { display:flex; flex-wrap:wrap; gap:7px; margin:15px 0 0; }
+      .pill { padding:5px 8px; border-radius:6px; background:#f3f6f3; color:#53635a; font-size:11px; }
+      .pill.funding { background:#edf5ef; color:#356a4a; }
+      .description { margin:13px 0 0; color:#53635a; font-size:13px; white-space:pre-line; }
+      .foot { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; padding-top:13px; margin-top:15px; border-top:1px solid #edf0ed; color:var(--muted); font-size:12px; }
+      .source-links { display:flex; flex-wrap:wrap; gap:12px; }
+      .source-links a { font-weight:650; text-decoration:none; }
+      .source-links a:hover { text-decoration:underline; }
+      .empty,.error { padding:40px 20px; border:1px dashed #ced9d0; border-radius:14px; color:var(--muted); text-align:center; background:#fff; }
+      .more-wrap { display:flex; justify-content:center; padding-top:18px; }
+      .more { min-height:42px; padding:0 17px; border:1px solid var(--line); border-radius:10px; background:#fff; color:var(--green); font:inherit; font-size:13px; font-weight:700; }
+      .more:hover { background:var(--mint); }
+      footer { margin-top:38px; color:#87928b; text-align:center; font-size:12px; }
+      @media (max-width:850px) { .filters { grid-template-columns:repeat(2,minmax(0,1fr)); } .filters input { grid-column:1/-1; } }
+      @media (max-width:560px) { .shell { padding:22px 15px 45px; } .hero { align-items:flex-start; flex-direction:column; margin-top:29px; } .filters { grid-template-columns:1fr; } .filters input { grid-column:auto; } .card { padding:16px; } .card-head { flex-direction:column-reverse; gap:10px; } }
+      @media (prefers-reduced-motion: no-preference) { .card { animation:rise .28s ease both; } @keyframes rise { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } } }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <div class="topline"><span class="mark" aria-hidden="true">G</span><span>GradFund Finder</span></div>
+      <header class="hero">
+        <div><h1>Graduate opportunities</h1><p class="intro">A public, read-only snapshot of saved Master's, PhD, and research leads. This listing is sample data from the project's collected records and may not reflect the latest changes online.</p></div>
+        <span class="snapshot-tag">Public snapshot · no live search</span>
+      </header>
+      <p class="summary" id="summary" aria-live="polite">Loading snapshot…</p>
+      <section class="filters" aria-label="Filter snapshot opportunities">
+        <input id="q" type="search" placeholder="Search title, institution, field…" aria-label="Search opportunities" />
+        <select id="degree" aria-label="Filter by degree"><option value="">Any degree</option></select>
+        <select id="country" aria-label="Filter by country"><option value="">Any country</option></select>
+        <select id="field" aria-label="Filter by research field"><option value="">Any field</option></select>
+        <select id="funding" aria-label="Filter by funding"><option value="">Any funding</option><option value="FULL">Fully funded</option><option value="PARTIAL">Partial funding</option><option value="UNCLEAR">Funding mentioned</option><option value="NO_EVIDENCE">Not stated</option></select>
+      </section>
+      <section class="results" id="results" aria-label="Opportunities"></section>
+      <div class="more-wrap"><button class="more" id="more" type="button" hidden>Load more</button></div>
+      <footer id="updated">The snapshot is updated when its owner exports the latest database records and republishes it.</footer>
+    </main>
+    <script>
+      const state = { all: [], visible: 0, pageSize: 20 };
+      const byId = (id) => document.getElementById(id);
+      const filters = ["q", "degree", "country", "field", "funding"];
+      const safeText = (value) => typeof value === "string" && value.trim() ? value.trim() : "Unknown";
+      const unique = (values) => [...new Set(values.filter((value) => typeof value === "string" && value.trim()))].sort((a,b) => a.localeCompare(b));
+      function fillSelect(id, values) {
+        const select = byId(id);
+        for (const value of unique(values)) { const option = document.createElement("option"); option.value = value; option.textContent = value; select.append(option); }
+      }
+      function make(tag, className, text) {
+        const element = document.createElement(tag);
+        if (className) element.className = className;
+        if (text !== undefined) element.textContent = text;
+        return element;
+      }
+      function fundingLabel(value) {
+        return ({ FULL:"Fully funded", PARTIAL:"Partial funding", UNCLEAR:"Funding mentioned", NO_EVIDENCE:"Funding not stated" })[value] || "Funding unknown";
+      }
+      function opportunityCard(item) {
+        const card = make("article", "card");
+        const head = make("div", "card-head");
+        const titleBlock = make("div");
+        titleBlock.append(make("h2", "", safeText(item.title)));
+        const org = [item.professor, item.institution].filter((part) => typeof part === "string" && part.trim()).join(" · ");
+        titleBlock.append(make("p", "org", org || "Institution or supervisor unknown"));
+        const verification = String(item.verificationStatus || "UNVERIFIED").toUpperCase();
+        head.append(titleBlock, make("span", "badge" + (verification === "MANUALLY_VERIFIED" ? " verified" : ""), verification === "MANUALLY_VERIFIED" ? "Manually verified" : "Unverified lead"));
+        card.append(head);
+        const meta = make("div", "meta");
+        for (const value of [item.degreeLevel, item.country, item.researchField, item.category]) if (value) meta.append(make("span", "pill", value));
+        meta.append(make("span", "pill funding", fundingLabel(item.fundingClassification)));
+        card.append(meta);
+        if (item.fundingType) card.append(make("p", "description", "Funding details: " + item.fundingType));
+        if (item.description) card.append(make("p", "description", item.description));
+        const foot = make("div", "foot");
+        foot.append(make("span", "", "Deadline: " + safeText(item.deadline)));
+        const links = make("div", "source-links");
+        const urls = Array.isArray(item.sourceUrls) ? item.sourceUrls : [item.sourceUrl];
+        let linkCount = 0;
+        for (const raw of [...new Set(urls)]) {
+          try {
+            const url = new URL(raw);
+            if (url.protocol !== "https:" && url.protocol !== "http:") continue;
+            const link = make("a", "", linkCount === 0 ? "Open source ↗" : "Additional source ↗");
+            link.href = url.href; link.target = "_blank"; link.rel = "noopener noreferrer"; links.append(link); linkCount++;
+          } catch { /* Skip malformed source URLs in the snapshot. */ }
+        }
+        if (!linkCount) links.append(make("span", "", "Source URL unknown"));
+        foot.append(links); card.append(foot);
+        return card;
+      }
+      function render(reset = false) {
+        const q = byId("q").value.trim().toLowerCase();
+        const degree = byId("degree").value.toLowerCase();
+        const country = byId("country").value.toLowerCase();
+        const field = byId("field").value.toLowerCase();
+        const funding = byId("funding").value;
+        const filtered = state.all.filter((item) => {
+          const text = [item.title,item.institution,item.professor,item.description,item.researchField,item.department,item.labGroup].filter(Boolean).join(" ").toLowerCase();
+          return (!q || text.includes(q)) && (!degree || String(item.degreeLevel || "").toLowerCase() === degree) && (!country || String(item.country || "").toLowerCase() === country) && (!field || String(item.researchField || "").toLowerCase() === field) && (!funding || item.fundingClassification === funding);
+        });
+        if (reset) state.visible = state.pageSize;
+        const results = byId("results"); results.replaceChildren();
+        for (const item of filtered.slice(0, state.visible)) results.append(opportunityCard(item));
+        byId("summary").replaceChildren();
+        byId("summary").append(make("strong", "", String(filtered.length)), document.createTextNode(" opportunities match this snapshot filter"));
+        if (!filtered.length) results.append(make("div", "empty", "No saved opportunities match these filters."));
+        byId("more").hidden = state.visible >= filtered.length;
+      }
+      for (const id of filters) byId(id).addEventListener("input", () => render(true));
+      byId("more").addEventListener("click", () => { state.visible += state.pageSize; render(); });
+      fetch("./opportunities.json", { cache:"no-store" }).then((response) => { if (!response.ok) throw new Error("Snapshot file could not be loaded."); return response.json(); }).then((data) => {
+        state.all = Array.isArray(data.opportunities) ? data.opportunities : [];
+        fillSelect("degree", state.all.map((item) => item.degreeLevel));
+        fillSelect("country", state.all.map((item) => item.country));
+        fillSelect("field", state.all.map((item) => item.researchField));
+        const generated = data.generatedAt ? new Date(data.generatedAt) : null;
+        if (generated && !Number.isNaN(generated.valueOf())) byId("updated").textContent = "Snapshot generated " + generated.toLocaleString() + ". Refresh it with the local export script and publish a new build to update these records.";
+        render(true);
+      }).catch((error) => {
+        byId("summary").textContent = "Snapshot unavailable";
+        byId("results").append(make("div", "error", error.message || "Could not load the snapshot."));
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+node_modules/
+.next/
+out/
+snapshot-site/
+build/
+coverage/
+storage/
+.env*
+!.env.example
+*.tsbuildinfo

@@ -1,0 +1,42 @@
+{
+  "name": "gradfund-finder",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "db:init": "tsx scripts/init-db.ts",
+    "db:auth": "tsx scripts/migrate-auth.ts",
+    "db:setup": "docker compose --env-file .env.local up -d --wait mysql && npm run db:init",
+    "collect": "tsx scripts/collect.ts",
+    "scout": "tsx scripts/recruitment-scout.ts",
+    "snapshot:export": "tsx scripts/export-public-snapshot.ts",
+    "snapshot:build": "tsx scripts/build-public-snapshot.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/domain.test.ts tests/recruitment-scout.test.ts",
+    "test:integration": "tsx --test tests/db.integration.test.ts"
+  },
+  "dependencies": {
+    "@crawlee/cheerio": "^3.18.2",
+    "@crawlee/playwright": "^3.18.2",
+    "@langchain/google-genai": "^2.3.2",
+    "@langchain/langgraph": "^1.5.1",
+    "mysql2": "^3.24.6",
+    "next": "^14.2.15",
+    "playwright": "^1.64.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.4",
+    "@types/react": "^18.3.10",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.20",
+    "daisyui": "^4.12.14",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "tsx": "^4.20.6",
+    "typescript": "^5.6.2"
+  }
+}
