@@ -212,10 +212,3 @@ The optional database integration tests require the initialized MySQL service:
 ```powershell
 npm run test:integration
 ```
-
-## Repository media folders
-
-- `docs/screenshots/` — dashboard, opportunity card, and email draft images.
-- `docs/demo/` — short compressed screen-recording video.
-
-Replace the commented image/video paths near the top of this README after adding media. Avoid including API keys, OAuth tokens, personal inbox contents, or private user data in screenshots and recordings.
