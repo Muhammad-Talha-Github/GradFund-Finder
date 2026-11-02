@@ -19,7 +19,7 @@ This is a full-stack, multi-agent research and outreach assistant built with Nex
 ![Email drafts 2](docs/screenshots/Grad_Helper_Email_Drafts2.png)
 
 ### Demo Video
-<video src="docs/demo/Grad_Helper_Demo_Video.mp4" autoplay loop muted width="600"></video>
+https://github.com/user-attachments/assets/fc6ea88e-b49c-44e3-94c9-d8784ee87f57
 
 ## What the project does
 
