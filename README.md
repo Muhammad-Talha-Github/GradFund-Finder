@@ -10,11 +10,11 @@ This is a full-stack, multi-agent research and outreach assistant built with Nex
 
 Add product images under `docs/screenshots/`, then uncomment or replace the examples below. Suggested images: the dashboard, an opportunity card, and the email drafts section.
 
-<!--
-![GradFund Finder dashboard](docs/screenshots/dashboard.png)
-![Opportunity details](docs/screenshots/opportunity-card.png)
-![Email drafts](docs/screenshots/email-drafts.png)
--->
+
+![GradFund Finder dashboard](docs/screenshots/Grad_Helper_Dashboard.png)
+![Opportunity details](docs/screenshots/Grad_Helper_Opportunity_Card.png)
+![Email drafts 1](docs/screenshots/Grad_Helper_Email_Drafts1.png)
+![Email drafts 2](docs/screenshots/Grad_Helper_Email_Drafts2.png)
 
 Add a short, compressed walkthrough video under `docs/demo/gradfund-finder-demo.mp4` or upload it to GitHub and replace this placeholder with the resulting link.
 
