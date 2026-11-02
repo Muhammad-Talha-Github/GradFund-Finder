@@ -19,7 +19,7 @@ This is a full-stack, multi-agent research and outreach assistant built with Nex
 ![Email drafts 2](docs/screenshots/Grad_Helper_Email_Drafts2.png)
 
 ### Demo Video
-![Watch the GradFund Finder demo](docs/demo/Grad_Helper_Demo_Video.mp4) 
+<video src="docs/demo/Grad_Helper_Demo_Video.mp4" autoplay loop muted width="600"></video>
 
 ## What the project does
 
